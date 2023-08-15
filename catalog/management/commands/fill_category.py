@@ -12,7 +12,7 @@ class Command(BaseCommand):
         Category.objects.all().delete()
         with connection.cursor() as cursor:
             cursor.execute("ALTER SEQUENCE catalog_category_id_seq RESTART WITH 1")
-        with open("category_data.json", "r", encoding="windows-1251") as file:
+        with open("catalog_data.json", "r", encoding="windows-1251") as file:
             data = json.load(file)
             for item in data:
                 if item["model"] == "catalog.category":
