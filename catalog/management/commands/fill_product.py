@@ -15,7 +15,7 @@ class Command(BaseCommand):
         with open("catalog_data.json", "r", encoding="windows-1251") as file:
             data = json.load(file)
             for item in data:
-                if item["model"] == "catalog.category":
+                if item["model"] == "catalog.product":
                     Product.objects.create(
                         name=item["fields"]["name"],
                         description=item["fields"]["description"],
@@ -23,5 +23,5 @@ class Command(BaseCommand):
                         category=Category.objects.get(pk=item["fields"]["category"]),
                         price=item["fields"]["price"],
                         creation_date=item["fields"]["creation_date"],
-                        last_change_date=item["fields"]["last_change_date"]
+                        last_modified_date=item["fields"]["last_modified_date"]
                     )
