@@ -1,11 +1,11 @@
 [
   {
     "model": "catalog.product",
-    "pk": 2,
+    "pk": 8,
     "fields": {
       "name": "Apple iPhone 14 Pro Max",
-      "description": "128GB",
-      "image": "",
+      "description": "iPhone 14 Pro Max — смартфон в корпусе цвета Deep Purple, выполненном из нержавеющей стали и противоударного стекла Ceramic Shield, обладает встроенной памятью 128 Гб.",
+      "image": "products/30065140bb.png",
       "category": 1,
       "price": 120000,
       "creation_date": null,
@@ -14,24 +14,24 @@
   },
   {
     "model": "catalog.product",
-    "pk": 3,
+    "pk": 9,
     "fields": {
-      "name": "Samsung Galaxy S23",
-      "description": "256GB",
-      "image": "",
+      "name": "Samsung Galaxy S23 Ultra",
+      "description": "Смартфон Samsung Galaxy S23 Ultra Black — модель с безрамочным экраном диагональю 6,8 дюйма, выполненным по технологии Dynamic AMOLED 2X. Разрешение — 3088x1440 пикселей, частота обновления — 120 Гц. Отображается 16 млн цветов.",
+      "image": "products/30067223bb.png",
       "category": 1,
-      "price": 80000,
+      "price": 110000,
       "creation_date": null,
       "last_modified_date": null
     }
   },
   {
     "model": "catalog.product",
-    "pk": 4,
+    "pk": 10,
     "fields": {
       "name": "HONOR 70",
-      "description": "128Gb",
-      "image": "",
+      "description": "Смартфон Honor 70 в стеклянном корпусе цвета Emerald Green работает на операционной системе Android Magic UI 6.1. Высокую производительность обеспечивают 8 Гб оперативной памяти и восьмиядерный процессор Qualcomm Snapdragon 778G Plus.",
+      "image": "products/30065642bb.png",
       "category": 1,
       "price": 40000,
       "creation_date": null,
@@ -40,11 +40,11 @@
   },
   {
     "model": "catalog.product",
-    "pk": 5,
+    "pk": 11,
     "fields": {
       "name": "Apple MacBook Air 13",
-      "description": "M1/8/256",
-      "image": "",
+      "description": "Ноутбук Apple MacBook Air 13 M1 в алюминиевом корпусе цвета Space Gray оснащен восьмиядерным процессором Apple M1 и семиядерным графическим контроллером. Объем оперативной памяти 8 Гб, твердотельного накопителя 256 Гб. Экран диагональю 13,3 дюймов.",
+      "image": "products/30064273b.png",
       "category": 2,
       "price": 96000,
       "creation_date": null,
@@ -53,11 +53,11 @@
   },
   {
     "model": "catalog.product",
-    "pk": 6,
+    "pk": 12,
     "fields": {
       "name": "Acer Aspire C27-1700",
-      "description": "Intel Core i5 1235U",
-      "image": "",
+      "description": "Моноблок Acer Aspire C27-1700 DQ.BJKMC.009 — персональный компьютер с современными функциями, предназначенный для офисных дел и мультимедийных развлечений. Прибор работает под управлением десятиядерного процессора Intel Core i5 1235U (1,3-4,4 ГГц).",
+      "image": "products/30067651bb.png",
       "category": 2,
       "price": 77000,
       "creation_date": null,
@@ -66,11 +66,11 @@
   },
   {
     "model": "catalog.product",
-    "pk": 7,
+    "pk": 13,
     "fields": {
       "name": "Samsung QE65S95CAU",
-      "description": "65\"/3840x2160",
-      "image": "",
+      "description": "Черный телевизор Samsung QE65QS95CAU с 65-дюймовой QLED-панелью работает на основе ОС Tizen. Модель получила низкочастотную акустическую систему мощностью 70 Вт и поддержку воспроизведения с USB-носителя. Прибор оснащен встроенным Bluetooth-модулем.",
+      "image": "products/10032191bb.png",
       "category": 3,
       "price": 335000,
       "creation_date": null,
