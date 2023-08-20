@@ -3,23 +3,23 @@
 {% block content %}
 
     <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-        <h1 class="display-4">{{ name }}</h1>
+        <h1 class="display-4">{{ product.name }}</h1>
     </div>
     <div class="container">
         <div class="row text-start">
             <div class="col-lg-3 col-md-6 col-sm-12">
                 <div class="card mb-4 box-shadow">
-                    <img class="center-block" style="max-width: 100%" src="{% mediapath image %}" alt="">
+                    <img class="center-block" style="max-width: 100%" src="{% mediapath product.image %}" alt="">
                 </div>
             </div>
             <div class="col-lg-9 col-md-6 col-sm-12">
                 <div class="card mb-4 box-shadow">
                     <div class="card-body">
-                        <p class="card-text" align="left"> Цена: {{ price }} рублей</p>
-                        <p class="card-text" align="left"> Описание: {{ description }}</p>
-                        <p class="card-text" align="left"> Категория: {{ category }}</p>
-                        <p class="card-text" align="left"> Дата создания: {{ creation_date }}</p>
-                        <p class="card-text" align="left"> Дата изменения: {{ last_modified_date }}</p>
+                        <p class="card-text" align="left"> Цена: {{ product.price }} рублей</p>
+                        <p class="card-text" align="left"> Описание: {{ product.description }}</p>
+                        <p class="card-text" align="left"> Категория: {{ product.category }}</p>
+                        <p class="card-text" align="left"> Дата создания: {{ product.creation_date }}</p>
+                        <p class="card-text" align="left"> Дата изменения: {{ product.last_modified_date }}</p>
                     </div>
                 </div>
             </div>

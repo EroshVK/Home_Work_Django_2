@@ -1,39 +1,119 @@
-from django.shortcuts import render
-from catalog.models import Product
+from datetime import datetime
+from pytils.translit import slugify
+
+from django.urls import reverse_lazy, reverse
+from django.views.generic import ListView, TemplateView, DetailView, CreateView, UpdateView, DeleteView
+
+from catalog.models import Product, Blog
 
 
 # Create your views here.
 
 
-def home(request):
-    product_list = Product.objects.all()
-    context = {
-        'object_list': product_list,
-        'title': 'Главная'
-    }
-    if request.method == 'GET':
-        return render(request, 'catalog/home.html', context)
+class ProductListView(ListView):
+    model = Product
+    template_name = 'catalog/home.html'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Главная'
+        return context
 
 
-def contacts(request):
-    context = {
-        'title': 'Контакты'
-    }
-    if request.method == 'GET':
-        return render(request, 'catalog/contacts.html', context)
+class ContactsView(TemplateView):
+    template_name = 'catalog/contacts.html'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Контакты'
+        return context
 
 
-def product(request, id):
-    product_id = Product.objects.get(pk=id)
-    context = {
-        "name": product_id.name,
-        "description": product_id.description,
-        "image": product_id.image,
-        "category": product_id.category,
-        "price": product_id.price,
-        "creation_date": product_id.creation_date,
-        "last_modified_date": product_id.last_modified_date,
-        "title": f"Товар {product_id.name}"
-    }
-    if request.method == 'GET':
-        return render(request=request, template_name='catalog/product.html', context=context)
+class ProductDetailView(DetailView):
+    model = Product
+    template_name = 'catalog/product.html'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.filter(pk=self.kwargs.get('pk'))
+        return queryset
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = self.object.name
+        return context
+
+
+class BlogCreateView(CreateView):
+    model = Blog
+    fields = ('title', 'content', 'image', 'is_publish')
+    success_url = reverse_lazy('catalog:blog')
+
+    def form_valid(self, form):
+        if form.is_valid():
+            new_post = form.save()
+            new_post.creation_date = datetime.now()  # определение даты написания поста
+            new_post.slug = slugify(new_post.title)  # создание slug
+            new_post.save()
+        return super().form_valid(form)
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Создание блоговой записи'
+        return context
+
+
+class BlogListView(ListView):
+    model = Blog
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Блоговые записи'
+        return context
+
+
+class BlogDetailView(DetailView):
+    model = Blog
+
+    def get_object(self, queryset=None):
+        self.object = super().get_object(queryset)
+        self.object.count_of_views += 1
+        self.object.save()
+        return self.object
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.filter(pk=self.kwargs.get('pk'))
+        return queryset
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = self.object.title
+        return context
+
+
+class BlogUpdateView(UpdateView):
+    model = Blog
+    fields = ('title', 'content', 'image', 'is_publish')
+    success_url = reverse_lazy('catalog:blog')
+
+    def form_valid(self, form):
+        if form.is_valid():
+            new_post = form.save()
+            new_post.slug = slugify(new_post.title)  # обновление slug
+            new_post.save()
+
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('catalog:blog_pk', args=[self.object.pk])
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Редактирование блоговой записи'
+        return context
+
+
+class BlogDeleteView(DeleteView):
+    model = Blog
+    success_url = reverse_lazy('catalog:blog')

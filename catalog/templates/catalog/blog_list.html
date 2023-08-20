@@ -1,0 +1,38 @@
+{% extends 'catalog/base.html' %}
+{% load template_tags %}
+{% block content %}
+    <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+        <h1 class="display-4 fw-normal text-body-emphasis">{{ title }}</h1>
+    </div>
+
+
+    <main>
+        <a class="btn btn-primary" href="{% url 'catalog:blog_create' %}" role="button">Создать новую запись</a>
+        <p></p>
+        <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+            {% for object in object_list %}
+                {% if object.is_publish == True %}
+                    <div class="col">
+                        <div class="card mb-4 rounded-3 shadow-sm">
+                            <img src="{% mediapath object.image %}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ object.title }}</h5>
+                                <p class="card-text" align="left">{{ object.content|truncatechars:100 }}</p>
+                                <p>
+                                    <a class="btn btn-primary" href="{% url 'catalog:blog_pk' object.pk %}"
+                                       role="button">Подробнее</a>
+                                    <a class="btn btn-primary" href="{% url 'catalog:blog_update' object.pk %}"
+                                       role="button">Изменить</a>
+                                    <a class="btn btn-primary" href="{% url 'catalog:blog_delete' object.pk %}"
+                                       role="button">Удалить</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+    </main>
+
+{% endblock %}
