@@ -1,29 +1,42 @@
 {% extends 'catalog/base.html' %}
 {% load template_tags %}
 {% block content %}
-<div class="pricing-header p-3 pb-md-4 mx-auto text-center">
-    <h1 class="display-4 fw-normal text-body-emphasis">{{ title }}</h1>
-    <p class="fs-5 text-body-secondary">Интернет-магазин электроники</p>
-</div>
-
-
-<main>
-    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
-        {% for object in object_list %}
-            <div class="col">
-                <div class="card mb-4 rounded-3 shadow-sm">
-                    <img src="{% mediapath object.image %}" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ object.name }}</h5>
-                        <h6 class="card-title">{{ object.price }} рублей</h6>
-                        <p class="card-text" align="left">{{ object.description|truncatechars:100 }}</p>
-                        <p><a class="btn btn-primary" href="{% url 'catalog:product' object.pk %}" role="button">Подробнее</a></p>
-                    </div>
-                </div>
-            </div>
-        {% endfor %}
+    <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+        <h1 class="display-4 fw-normal text-body-emphasis">{{ title }}</h1>
+        <p class="fs-5 text-body-secondary">Интернет-магазин электроники</p>
     </div>
 
-</main>
+
+    <main>
+        <a class="btn btn-primary" href="{% url 'catalog:product_create' %}" role="button">Добавить новый продукт</a>
+        <p></p>
+        <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+            {% for object in object_list %}
+                <div class="col">
+                    <div class="card mb-4 rounded-3 shadow-sm">
+                        <img src="{% mediapath object.image %}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ object.name }}</h5>
+                            <h6 class="card-title">{{ object.price }} рублей</h6>
+                            <p class="card-text" align="left">{{ object.description|truncatechars:100 }}</p>
+                            {% for version in object.version_set.all %}
+                                {% if version.is_active == True %}
+                                    <p>Версия продукта: {{ version.number }} - {{ version.version_name }}</p>
+                                {% endif %}
+                            {% endfor %}
+                            <p><a class="btn btn-primary" href="{% url 'catalog:product' object.pk %}"
+                                  role="button">Подробнее</a>
+                                <a class="btn btn-primary" href="{% url 'catalog:product_update' object.pk %}"
+                                   role="button">Изменить</a>
+                                <a class="btn btn-primary" href="{% url 'catalog:product_delete' object.pk %}"
+                                   role="button">Удалить</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+    </main>
 
 {% endblock %}

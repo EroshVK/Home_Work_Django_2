@@ -12,6 +12,7 @@ class Product(models.Model):
     creation_date = models.DateTimeField(verbose_name='дата создания', **NULLABLE)
     last_modified_date = models.DateTimeField(verbose_name='дата последнего изменения', **NULLABLE)
 
+
     def __str__(self):
         return f'{self.name} - {self.category} - {self.price}'
 
@@ -47,3 +48,17 @@ class Blog(models.Model):
     class Meta:
         verbose_name = 'блоговая запись'
         verbose_name_plural = 'блоговые записи'
+
+
+class Version(models.Model):
+    product = models.ForeignKey(Product, verbose_name='Товар', on_delete=models.CASCADE)
+    number = models.IntegerField(verbose_name='Версия продукта', **NULLABLE)
+    version_name = models.CharField(max_length=150, verbose_name='Название версии', **NULLABLE)
+    is_active = models.BooleanField(default=True, verbose_name='Версия активна')
+
+    def __str__(self):
+        return f'{self.product.name}: Версия {self.number}'
+
+    class Meta:
+        verbose_name = ('Версия продукта')
+        verbose_name_plural = ('Версии продукта')

@@ -20,6 +20,11 @@
                         <p class="card-text" align="left"> Категория: {{ product.category }}</p>
                         <p class="card-text" align="left"> Дата создания: {{ product.creation_date }}</p>
                         <p class="card-text" align="left"> Дата изменения: {{ product.last_modified_date }}</p>
+                        {% for version in object.version_set.all %}
+                            {% if version.is_active == True %}
+                                <p>Версия продукта: {{ version.number }} - {{ version.version_name }}</p>
+                            {% endif %}
+                        {% endfor %}
                     </div>
                 </div>
             </div>

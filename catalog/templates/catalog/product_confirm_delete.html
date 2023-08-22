@@ -2,17 +2,18 @@
 {% load template_tags %}
 {% block content %}
 
+
     <main>
         <div class="col-lg-6 col-md-6 col-sm-12">
             <div class="card mb-4 box-shadow">
                 <form method="post">
                     {% csrf_token %}
                     <div class="card-header">
-                        <h4 class="my-0 font-weight-normal">Удалить запись {{ blog.title }}?</h4>
+                        <h4 class="my-0 font-weight-normal">Удалить запись {{ product.name }}?</h4>
                     </div>
                     <div class="card-body">
                         <button type="submit" class="btn btn-primary">Удалить</button>
-                        <a class="btn btn-primary" href="{% url 'catalog:blog' %}" role="button">Отмена</a>
+                        <a class="btn btn-primary" href="{% url 'catalog:home' %}" role="button">Отмена</a>
                     </div>
                 </form>
             </div>
