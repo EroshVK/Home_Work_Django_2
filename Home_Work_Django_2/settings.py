@@ -9,11 +9,13 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+YANDEX_MAIL_PASSWORD = os.environ.get("YANDEX_MAIL_PASSWORD")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -142,5 +144,5 @@ EMAIL_HOST = 'smtp.yandex.ru'
 
 EMAIL_PORT = 465
 EMAIL_HOST_USER = 'eroshenko.vk@yandex.ru'
-EMAIL_HOST_PASSWORD = 'Veke4ko65'
+EMAIL_HOST_PASSWORD = YANDEX_MAIL_PASSWORD
 EMAIL_USE_SSL = True
