@@ -1,0 +1,24 @@
+{% extends 'catalog/base.html' %}
+{% block content %}
+
+<div class="row mt-5 mb-5">
+        <div class="col-2">
+        </div>
+        <div class="container text-left col-9 mt-5">
+        <div class="col-9">
+            <div class="card">
+                <div class="card-header">
+                    Доступ закрыт
+                </div>
+                    <div class="card-body">
+                        Добавление и изменение товаров доступно только зарегистрированным пользователям
+                    </div>
+                <div class="card-footer text-center">
+                    <a class="btn btn btn-outline-primary" href="{% url 'users:login' %}" type="button">Войти</a>
+                    <a class="btn btn-primary" href="{% url 'users:register' %}" type="button">Зарегистрироваться</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

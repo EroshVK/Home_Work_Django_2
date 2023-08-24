@@ -1,5 +1,6 @@
 from datetime import datetime
 
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.forms import inlineformset_factory
 from pytils.translit import slugify
 
@@ -13,7 +14,9 @@ from catalog.forms import ProductForm
 # Create your views here.
 
 
-class ProductListView(ListView):
+class ProductListView(LoginRequiredMixin, ListView):
+    login_url = 'users:suggest_register'
+    redirect_field_name = "suggest_register"
     model = Product
     template_name = 'catalog/home.html'
 
@@ -32,7 +35,9 @@ class ContactsView(TemplateView):
         return context
 
 
-class ProductDetailView(DetailView):
+class ProductDetailView(LoginRequiredMixin, DetailView):
+    login_url = 'users:suggest_register'
+    redirect_field_name = "suggest_register"
     model = Product
     template_name = 'catalog/product.html'
 
@@ -65,7 +70,9 @@ class ProductCreateView(CreateView):
         return context
 
 
-class ProductUpdateView(UpdateView):
+class ProductUpdateView(LoginRequiredMixin, UpdateView):
+    login_url = 'users:suggest_register'
+    redirect_field_name = "suggest_register"
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy('catalog:product')
@@ -94,7 +101,9 @@ class ProductUpdateView(UpdateView):
         return reverse('catalog:product', args=[self.object.pk])
 
 
-class ProductDeleteView(DeleteView):
+class ProductDeleteView(LoginRequiredMixin, DeleteView):
+    login_url = 'users:suggest_register'
+    redirect_field_name = "suggest_register"
     model = Product
     success_url = reverse_lazy('catalog:home')
 

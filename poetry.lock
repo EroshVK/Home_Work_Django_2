@@ -103,6 +103,17 @@ argon2 = ["argon2-cffi (>=19.1.0)"]
 bcrypt = ["bcrypt"]
 
 [[package]]
+name = "dotenv"
+version = "0.0.5"
+description = "Handle .env files"
+category = "main"
+optional = false
+python-versions = "*"
+files = [
+    {file = "dotenv-0.0.5.tar.gz", hash = "sha256:b58d2ab3f83dbd4f8a362b21158a606bee87317a9444485566b3c8f0af847091"},
+]
+
+[[package]]
 name = "executing"
 version = "1.2.0"
 description = "Get the currently executing AST node of a frame, and other information"
@@ -485,4 +496,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "db516a5eebdceefd47e24cdd551eced21b8b0bcbb247374109e9b64426d7b6d0"
+content-hash = "2d188c484a708612f7e57775fd503e43a51cb448b87815b34eb29c2b8362b32e"
