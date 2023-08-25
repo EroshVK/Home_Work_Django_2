@@ -2,6 +2,7 @@ from datetime import datetime
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.forms import inlineformset_factory
+from django.shortcuts import redirect
 from pytils.translit import slugify
 
 from django.urls import reverse_lazy, reverse
@@ -57,15 +58,24 @@ class ProductCreateView(CreateView):
     form_class = ProductForm
     success_url = reverse_lazy('catalog:home')
 
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect('users:suggest_register')
+        else:
+            return super().dispatch(request, *args, **kwargs)
+
     def form_valid(self, form):
         if form.is_valid():
             new_product = form.save()
             new_product.creation_date = datetime.now()  # определение даты написания поста
+            new_product.owner = self.request.user
             new_product.save()
         return super().form_valid(form)
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
+        user = self.request.user
+        context['user'] = user
         context['title'] = 'Добавление нового продукта'
         return context
 
