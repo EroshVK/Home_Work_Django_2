@@ -8,11 +8,12 @@ class Product(models.Model):
     name = models.CharField(max_length=100, verbose_name='наименование')
     description = models.CharField(max_length=250, verbose_name='описание')
     image = models.ImageField(upload_to='products/', verbose_name='изображение', **NULLABLE)
-    category = models.ForeignKey("Category", on_delete=models.CASCADE, )
+    category = models.ForeignKey("Category", verbose_name='категория', on_delete=models.CASCADE, )
     price = models.IntegerField(verbose_name='цена')
     creation_date = models.DateTimeField(verbose_name='дата создания', **NULLABLE)
     last_modified_date = models.DateTimeField(verbose_name='дата последнего изменения', **NULLABLE)
     owner = models.ForeignKey(User, verbose_name=' пользователь', on_delete=models.CASCADE, **NULLABLE)
+    is_published = models.BooleanField(default=False, verbose_name='статус публикации')
 
     def __str__(self):
         return f'{self.name} - {self.category} - {self.price}'
